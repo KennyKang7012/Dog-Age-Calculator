@@ -73,8 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
   calcBtn.addEventListener("click", function () {
     const dogName = dogNameInput.value.trim();
     const birthDateValue = birthDateInput.value;
-
-    // 從單選按鈕中取得狗狗體型
     const dogSize = getSelectedDogSize();
 
     // 1. 基本輸入檢查
@@ -149,16 +147,15 @@ document.addEventListener("DOMContentLoaded", function () {
     birthDateInput.value = "";
 
     // 體型選回預設值（小型犬）
-    const smallDogRadio = document.querySelector('input[name="dogSize"][value="small"]');
+    const smallDogRadio = document.querySelector(
+      'input[name="dogSize"][value="small"]'
+    );
     if (smallDogRadio) smallDogRadio.checked = true;
 
-    // 清空錯誤訊息
+    // 清空錯誤訊息與結果
     clearError();
-
-    // 隱藏結果
     hideResult();
-});
-
+  });
 
   // 取得目前勾選的狗狗體型
   function getSelectedDogSize() {
@@ -207,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const group = table[size];
     if (!group || !group[age]) {
-      // 正常情況不會進來，做一個保底
+      // 正常情況不會進來，保底處理
       return dogYears * 7;
     }
 
@@ -215,7 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // === 畫面顯示 / 錯誤處理的小工具函式 ===
-
   function showError(message) {
     errorMessageEl.textContent = message;
   }
