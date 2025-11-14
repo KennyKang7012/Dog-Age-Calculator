@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>狗狗歲數計算機</title>
+  <!-- 外部樣式 -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- 外部腳本，defer 代表等 HTML 載入後再執行 JS -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="calculator-container">
+    <h1 class="calculator-title">🐶 狗狗歲數計算機</h1>
+    <p class="calculator-subtitle">
+      輸入狗狗名字、體型與出生日期，<br />
+      幫你估算牠現在幾歲，以及大約相當於人類幾歲。
+    </p>
+
+    <!-- 狗狗名字 -->
+    <div class="form-group">
+      <label for="dogName">狗狗的名字</label>
+      <input
+        type="text"
+        id="dogName"
+        placeholder="例如：小黑、球球、UniDog"
+      />
+    </div>
+
+    <!-- 狗狗體型 -->
+    <div class="form-group">
+      <label>狗狗體型</label>
+      <div class="size-options">
+        <label class="size-option">
+          <input type="radio" name="dogSize" value="small" checked />
+          <span>小型犬</span>
+        </label>
+        <label class="size-option">
+          <input type="radio" name="dogSize" value="medium" />
+          <span>中型犬</span>
+        </label>
+        <label class="size-option">
+          <input type="radio" name="dogSize" value="large" />
+          <span>大型犬</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- 出生日期 -->
+    <div class="form-group">
+      <label for="birthDate">狗狗的出生日期</label>
+      <input type="date" id="birthDate" />
+    </div>
+
+    <!-- 錯誤訊息顯示區 -->
+    <p id="errorMessage" class="error-message"></p>
+
+    <!-- 計算按鈕 -->
+    <button id="calcBtn" class="btn">計算狗狗歲數</button>
+
+    <!-- 新增：重填按鈕 -->
+    <button id="resetBtn" class="btn btn-reset">重填</button>
+
+    <!-- 結果顯示區 -->
+    <div id="resultCard" class="result-card">
+      <div class="result-title" id="resultTitle"></div>
+      <p class="result-detail" id="resultDogAge"></p>
+      <p class="result-detail" id="resultHumanAge"></p>
+      <p class="result-note">
+        ※ 以上為概略的推估結果，實際情況仍會受到狗狗體型、品種與健康狀況影響。
+      </p>
+    </div>
+
+    <p class="footer-note">HexSchool 前端練習小作品 · 使用 HTML / CSS / JavaScript 製作</p>
+  </div>
+</body>
+</html>

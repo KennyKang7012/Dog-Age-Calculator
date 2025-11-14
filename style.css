@@ -1,0 +1,196 @@
+/* 全站基礎樣式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Noto Sans TC", sans-serif;
+  background: #f5f7fb;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 外層容器 */
+.calculator-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  padding: 24px 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.calculator-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.calculator-subtitle {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 表單區塊 */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d5d9e2;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* 體型選項區塊 */
+.size-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.size-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* 讓點了 radio 之後看起來比較明顯 */
+.size-option input[type="radio"] {
+  accent-color: #4f46e5;
+}
+
+.size-option:hover {
+  background-color: #eef2ff;
+  border-color: #c7d2fe;
+}
+
+/* 按鈕樣式 */
+.btn {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  margin-top: 4px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.1s ease;
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.3);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.35);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+  opacity: 0.9;
+}
+
+/* 重填按鈕（淺灰色風格） */
+.btn-reset {
+  margin-top: 10px;
+  background: #e5e7eb;
+  color: #374151;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-reset:hover {
+  background: #d1d5db;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.btn-reset:active {
+  background: #9ca3af;
+  box-shadow: none;
+}
+
+/* 錯誤訊息 */
+.error-message {
+  min-height: 1.2em; /* 保留空間，沒有錯也不會整個跳動 */
+  font-size: 0.9rem;
+  color: #e11d48;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+/* 結果區塊 */
+.result-card {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  font-size: 0.95rem;
+  color: #14532d;
+  display: none; /* 預設隱藏，計算後再顯示 */
+}
+
+.result-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.result-detail {
+  margin: 2px 0;
+}
+
+.result-note {
+  font-size: 0.8rem;
+  color: #166534;
+  margin-top: 6px;
+}
+
+/* 小小 Footer 說明 */
+.footer-note {
+  margin-top: 18px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #9ca3af;
+}
+
+@media (max-width: 600px) {
+  .calculator-container {
+    margin: 16px;
+    padding: 18px 16px;
+  }
+}
