@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultDogAge = document.getElementById("resultDogAge");
   const resultHumanAge = document.getElementById("resultHumanAge");
 
+  // === localStorage 的 key ===
+  const STORAGE_KEY = "dogAgeCalculatorData";
+
   // 體型對照表資料（來自你提供的表格）
   const ageTable = {
     small: {
@@ -136,6 +139,15 @@ document.addEventListener("DOMContentLoaded", function () {
     )}）`;
 
     showResult();
+
+    // === 保存結果到 localStorage ===
+    saveToLocalStorage({
+      dogName: dogName,
+      dogSize: dogSize,
+      birthDate: birthDateValue,
+      displayDogYears: displayDogYears,
+      displayHumanYears: displayHumanYears,
+    });
   });
 
   // === 重填按鈕功能 ===
@@ -155,6 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // 清空錯誤訊息與結果
     clearError();
     hideResult();
+
+    // === 清空 localStorage ===
+    clearLocalStorage();
   });
 
   // 取得目前勾選的狗狗體型
@@ -227,4 +242,69 @@ document.addEventListener("DOMContentLoaded", function () {
   function hideResult() {
     resultCard.style.display = "none";
   }
+
+  // === localStorage 相關函式 ===
+  // 保存計算結果到 localStorage
+  function saveToLocalStorage(data) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      console.log("✓ 結果已保存至 localStorage");
+    } catch (error) {
+      console.error("✗ localStorage 保存失敗:", error);
+    }
+  }
+
+  // 從 localStorage 讀取之前的計算結果
+  function loadFromLocalStorage() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (data) {
+        return JSON.parse(data);
+      }
+    } catch (error) {
+      console.error("✗ localStorage 讀取失敗:", error);
+    }
+    return null;
+  }
+
+  // 清空 localStorage 的計算結果
+  function clearLocalStorage() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      console.log("✓ localStorage 已清空");
+    } catch (error) {
+      console.error("✗ localStorage 清空失敗:", error);
+    }
+  }
+
+  // 頁面加載時，恢復上次的計算結果
+  function restorePreviousResult() {
+    const savedData = loadFromLocalStorage();
+    if (savedData) {
+      // 恢復表單內容
+      dogNameInput.value = savedData.dogName;
+      birthDateInput.value = savedData.birthDate;
+
+      // 恢復選中的體型
+      const sizeRadio = document.querySelector(
+        `input[name="dogSize"][value="${savedData.dogSize}"]`
+      );
+      if (sizeRadio) {
+        sizeRadio.checked = true;
+      }
+
+      // 恢復結果顯示
+      resultTitle.textContent = `${savedData.dogName} 的年齡結果：`;
+      resultDogAge.textContent = `🐾 狗狗實際年齡：約 ${savedData.displayDogYears} 歲`;
+      resultHumanAge.textContent = `👤 換算成人類年齡：約 ${savedData.displayHumanYears} 歲（${getSizeLabel(
+        savedData.dogSize
+      )}）`;
+
+      showResult();
+      console.log("✓ 已恢復上次的計算結果");
+    }
+  }
+
+  // === 頁面初始化時，恢復上次結果 ===
+  restorePreviousResult();
 });
